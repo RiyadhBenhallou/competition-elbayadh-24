@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="min-h-screen bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-          <header className="bg-white bg-opacity-10 backdrop-blur-lg">
+          <Navbar />
+          {/* <header className="bg-white bg-opacity-10 backdrop-blur-lg">
             <nav className="container mx-auto px-6 py-3">
               <div className="flex items-center justify-between">
                 <div className="text-white font-bold text-xl">
@@ -26,14 +29,9 @@ export default function RootLayout({
                 </div>
               </div>
             </nav>
-          </header>
+          </header> */}
           <main>{children}</main>
-          <footer className="bg-white bg-opacity-10 backdrop-blur-lg text-white text-center py-4">
-            <p>
-              &copy; {new Date().getFullYear()} UNIVAC Club. All rights
-              reserved.
-            </p>
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>

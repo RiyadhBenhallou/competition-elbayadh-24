@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+// @ts-expect-error err
 import confetti from "canvas-confetti";
 import {
   Sparkles,
