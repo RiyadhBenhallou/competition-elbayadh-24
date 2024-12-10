@@ -9,6 +9,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, Music, Moon, Cigarette, Stethoscope } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface PredictionInput {
   likes_music: boolean;
@@ -20,6 +21,7 @@ interface PredictionInput {
 interface User {
   id: string;
   name: string;
+  score: number;
 }
 
 export default function StudentCorrespondence() {
@@ -64,7 +66,7 @@ export default function StudentCorrespondence() {
       <Card className="w-full max-w-md">
         <CardContent className="p-6">
           <h2 className="text-2xl font-bold text-center mb-6">
-            Find Your Study Buddy!
+            Find Your Roommate!
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <ToggleOption
@@ -108,7 +110,7 @@ export default function StudentCorrespondence() {
               ) : (
                 <span className="flex items-center justify-center">
                   <Sparkles className="mr-2 h-4 w-4" />
-                  Find My Study Buddies!
+                  Find My Roommate!
                 </span>
               )}
             </Button>
@@ -122,7 +124,7 @@ export default function StudentCorrespondence() {
               className="mt-8"
             >
               <h3 className="text-xl font-semibold mb-4">
-                Your Study Buddies:
+                Your Possible Roommates are:
               </h3>
               <ul className="space-y-2">
                 {results.map((user) => (
@@ -131,15 +133,30 @@ export default function StudentCorrespondence() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center justify-between p-3 bg-secondary rounded-lg shadow-md"
+                    className={cn(
+                      "flex items-center justify-between p-3 bg-secondary rounded-lg shadow-md",
+                      user.score * 100 > 75
+                        ? "border border-green-500"
+                        : user.score * 100 > 70
+                        ? "border border-yellow-500"
+                        : "border border-red-500"
+                    )}
                   >
-                    <div className="flex items-center space-x-2">
+                    <div className={"flex items-center space-x-2"}>
                       <span className="text-sm text-muted-foreground">
                         {user.id}
                       </span>
                       <span className="text-lg font-medium">{user.name}</span>
                     </div>
-                    <span className="text-sm text-muted-foreground">
+                    <span
+                      className={`text-sm ${
+                        user.score * 100 > 75
+                          ? "text-green-500"
+                          : user.score * 100 > 70
+                          ? "text-yellow-500"
+                          : "text-red-500"
+                      }`}
+                    >
                       Similarity: {(user.score * 100).toFixed(2)}%
                     </span>
                   </motion.li>
