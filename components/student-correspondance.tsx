@@ -131,17 +131,9 @@ export default function StudentCorrespondence() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center justify-between p-3 bg-secondary rounded-lg shadow-md"
+                    className="flex items-center p-3 bg-secondary rounded-lg shadow-md"
                   >
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm text-muted-foreground">
-                        {user.id}
-                      </span>
-                      <span className="text-lg font-medium">{user.name}</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">
-                      Similarity: {(user.score * 100).toFixed(2)}%
-                    </span>
+                    <span className="text-lg font-medium">{user.name}</span>
                   </motion.li>
                 ))}
               </ul>
